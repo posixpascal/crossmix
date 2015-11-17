@@ -3,7 +3,13 @@
   <head>
     <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <META name="viewport" content="width=device-width, initial-scale=1">
-    <title>Welcome to crossmix</title>
+    <title>crossmix.io | fade two youtube videos into one</title>
+
+    <!-- scripts and styles -->
+    {% style "/assets/bootstrap/css/bootstrap.min.css" %}
+    {% style "/assets/bootstrap/css/bootstrap-theme.min.css" %}
+    {% style "/css/screen.css" %}
+
   </head>
   <body>
       <!-- navbar -->
@@ -28,8 +34,8 @@
                         <li {% ifequal page "home.html" %} class="active"{%endifequal%}>
                         <a href="{{servlet-context}}/">Home</a>
                         </li>
-                        <li {% ifequal page "about.html" %} class="active"{%endifequal%}>
-                        <a href="{{servlet-context}}/about">About</a>
+                         <li {% ifequal page "mix.html" %} class="active"{%endifequal%}>
+                        <a href="{{servlet-context}}/mix">Mix</a>
                         </li>
                     </ul>
                 </div>
@@ -41,10 +47,6 @@
       {% block content %}
       {% endblock %}
     </div>
-    <!-- scripts and styles -->
-    {% style "/assets/bootstrap/css/bootstrap.min.css" %}
-    {% style "/assets/bootstrap/css/bootstrap-theme.min.css" %}
-    {% style "/css/screen.css" %}
 
     {% script "/assets/jquery/jquery.min.js" %}
     {% script "/assets/bootstrap/js/bootstrap.min.js" %}

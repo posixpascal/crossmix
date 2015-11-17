@@ -21,6 +21,13 @@
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.webjars/bootstrap "3.3.5"]
                  [org.webjars/jquery "2.1.4"]
+                 [migratus "0.8.4"]
+                 [conman "0.2.5"]
+                 [digest "1.4.4"]
+                 [hikari-cp "1.3.1"]
+                 [com.carouselapps/to-jdbc-uri "0.4.1"]
+                 [org.clojure/java.jdbc "0.4.2"]
+                 [mysql/mysql-connector-java "5.1.6"]
                  [com.fzakaria/slf4j-timbre "0.2.1"]
                  [org.immutant/web "2.1.1" :exclusions [ch.qos.logback/logback-classic]]]
 
@@ -30,7 +37,10 @@
 
   :main crossmix.core
 
-  :plugins [[lein-environ "1.0.1"]]
+  :plugins [
+    [lein-environ "1.0.1"]
+    [migratus-lein "0.1.7"]
+    ]
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}

@@ -1,0 +1,7 @@
+CREATE TABLE IF NOT EXISTS crossmix(
+	id BIGINT NOT NULL AUTO_INCREMENT, 
+	audio VARCHAR(255), 
+	video VARCHAR(255),
+	uuid VARCHAR(255),
+	CONSTRAINT pk_crossmix PRIMARY KEY (id)
+);

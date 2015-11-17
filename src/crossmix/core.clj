@@ -2,6 +2,7 @@
   (:require [crossmix.handler :refer [app init destroy]]
             [immutant.web :as immutant]
             [clojure.tools.nrepl.server :as nrepl]
+            [crossmix.db.migrations :as migrations]
             [taoensso.timbre :as timbre]
             [environ.core :refer [env]])
   (:gen-class))
@@ -61,4 +62,8 @@
   (timbre/info "server started on port:" (:port @http-server)))
 
 (defn -main [& args]
-  (start-app args))
+  (cond
+    (some #{"migrate" "rollback"} args) (migrations/migrate args)
+    :else (start-app args)))
+  
+

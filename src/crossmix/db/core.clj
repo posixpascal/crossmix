@@ -15,6 +15,7 @@
 
 (con/bind-connection *conn* "sql/create-crossmix.sql")
 (con/bind-connection *conn* "sql/get-last-id.sql")
+(con/bind-connection *conn* "sql/get-crossmix.sql")
 
 (def pool-spec
   {:adapter    :mysql

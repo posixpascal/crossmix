@@ -17,12 +17,17 @@
                  [metosin/ring-middleware-format "0.6.0"]
                  [metosin/ring-http-response "0.6.5"]
                  [bouncer "0.3.3"]
+                 [prismatic/dommy "1.1.0"]
                  [prone "0.8.2"]
+                 [org.clojure/clojurescript "0.0-3211"
+                  :exclusions [org.apache.ant/ant]]
+
                  [org.clojure/tools.nrepl "0.2.12"]
                  [org.webjars/bootstrap "3.3.5"]
                  [org.webjars/jquery "2.1.4"]
                  [migratus "0.8.4"]
                  [conman "0.2.5"]
+
                  [digest "1.4.4"]
                  [hikari-cp "1.3.1"]
                  [com.carouselapps/to-jdbc-uri "0.4.1"]
@@ -36,15 +41,27 @@
   :jvm-opts ["-server"]
 
   :main crossmix.core
-
+  :resource-paths ["resources" "target/cljsbuild"]
+  :cljsbuild
+  {:builds [{:source-paths ["resources/public/cljs"]
+              :compiler {:output-to "resources/public/js/main.js"
+                         :optimizations :whitespace
+                         :pretty-print true}}]}
   :plugins [
     [lein-environ "1.0.1"]
     [migratus-lein "0.1.7"]
+    [lein-cljsbuild "1.0.4"]
     ]
   :profiles
   {:uberjar {:omit-source true
              :env {:production true}
              :aot :all}
+   :hooks ['leiningen.cljsbuild]
+   :cljsbuild {:jar true
+            :builds {:app
+                     {:compiler
+                      {:optimizations :advanced
+                       :pretty-print false}}}}
    :dev           [:project/dev :profiles/dev]
    :test          [:project/test :profiles/test]
    :project/dev  {:dependencies [[ring/ring-mock "0.3.0"]

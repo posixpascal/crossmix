@@ -10,3 +10,4 @@ profiles.clj
 /.env
 *.log
 resources/public/js
+resources/public/js/main.js

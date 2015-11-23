@@ -1,6 +1,65 @@
 {% extends "base.html" %}
 {% block content %}
-  <div>
-    <h1>Mixing {{audio}} & {{video}}</h1>
+  <div class="jumbotron">
+  
+    <h1>Crossmix.io</h1>
+  
+
+    <form method="POST" action="/mix/create">
+        {% csrf-field %}
+        <input type="text" name="youtube_video" data-video-source placeholder="Youtube Video Source" class="form-control"><br/>
+        <input type="text" name="youtube_audio" data-audio-source placeholder="Youtube Audio Source" class="form-control"><br/>
+        <hr>
+		<h5>Video Options</h5>
+		<div class="well">
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label>Start at: </label><input class="form-control" step="1" type="time" name="video_start_at" placeholder="HH:MM:SS">
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label>End at: </label><input class="form-control" step="1" type="time" seconds name="video_end_at">
+					</div>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="video_repeat">Repeat: <input type="checkbox" id="video_repeat" name="video_repeat"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<h5>Audio Options</h5>
+		<div class="well">
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label>Start at: </label><input class="form-control" step="1" type="time" name="audio_start_at" placeholder="HH:MM:SS">
+					</div>
+				</div>
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label>End at: </label><input class="form-control" step="1" type="time" seconds name="audio_end_at">
+					</div>
+				</div>	
+			</div>
+			<div class="row">
+				<div class="col-xs-6">
+					<div class="form-group">
+						<label for="audio_repeat">Repeat: <input type="checkbox" id="audio_repeat" name="audio_repeat"></label>
+					</div>
+				</div>
+			</div>
+		</div>
+        <hr>
+        <input type="submit" class="btn btn-primary btn-lg" value="Crossmix!">
+      </form>
+
+  
   </div>
+
 {% endblock %}

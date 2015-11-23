@@ -1,5 +1,6 @@
 (ns crossmix.routes.crossmix
   (:require [crossmix.layout :as layout]
+            [crossmix.helper :as helper]
             [compojure.core :refer [defroutes GET]]
             [compojure.core :refer [defroutes POST]]
             [ring.util.http-response :refer [ok]]
@@ -15,9 +16,7 @@
 
 (defonce ^:dynamic *conn* (atom nil))
 
-(defn is-youtube-url
-  [url]
-  (some? (re-find (re-pattern "youtube\\.\\w+\\/watch\\?v\\=(\\w+)") url)))
+
 
 (defn make-uuid
 	[id]
@@ -25,8 +24,8 @@
 )
 
 (defn mix-page [audio video]
-  (if-not (and (is-youtube-url audio) (is-youtube-url video)) (res/redirect "/"))
-  (if (and (is-youtube-url video) (is-youtube-url audio)) (do
+  (if-not (or (helper/is-youtube-url audio) (helper/is-youtube-url video)) (res/redirect "/"))
+  (if (and (helper/is-youtube-url video) (helper/is-youtube-url audio)) (do
     (def uuid 
       (make-uuid (str (System/currentTimeMillis))))
 
@@ -51,7 +50,14 @@
   }))
 
 
+(defn create-mix-page
+  []
+
+  (layout/render "mix.html"))
+
+
 (defroutes crossmix-routes
   ;(GET "/mix" [] (mix-))
+  (GET "/mix", [uuid] (create-mix-page))
   (GET "/mix/:uuid" [uuid] (view-mix-page uuid))
   (POST "/mix/create" [youtube_video youtube_audio] (mix-page youtube_audio youtube_video)))

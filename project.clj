@@ -17,7 +17,6 @@
                  [metosin/ring-middleware-format "0.6.0"]
                  [metosin/ring-http-response "0.6.5"]
                  [bouncer "0.3.3"]
-                 [prismatic/dommy "1.1.0"]
                  [prone "0.8.2"]
                  [org.clojure/clojurescript "0.0-3211"
                   :exclusions [org.apache.ant/ant]]
@@ -27,7 +26,7 @@
                  [org.webjars/jquery "2.1.4"]
                  [migratus "0.8.4"]
                  [conman "0.2.5"]
-
+                 [domina "1.0.3"]
                  [digest "1.4.4"]
                  [hikari-cp "1.3.1"]
                  [com.carouselapps/to-jdbc-uri "0.4.1"]
@@ -41,9 +40,9 @@
   :jvm-opts ["-server"]
 
   :main crossmix.core
-  :resource-paths ["resources" "target/cljsbuild"]
+  :resource-paths ["resources" "target/cljsbuild", "src"]
   :cljsbuild
-  {:builds [{:source-paths ["resources/public/cljs"]
+  {:builds [{:source-paths ["resources/public/cljs" "src/"]
               :compiler {:output-to "resources/public/js/main.js"
                          :optimizations :whitespace
                          :pretty-print true}}]}
